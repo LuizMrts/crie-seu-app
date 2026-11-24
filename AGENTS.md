@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Use owner-scoped Cloud Data API queries with RLS and composite owner/entity foreign keys; the database is the authority for data isolation and quote conversion.
+- Keep public preview at `/`, with all private workspace pages inside the integration-managed authenticated layout; the preview never substitutes sample records for real data.
+- Keep shared domain calculations and status rules in `src/lib/business.ts`, and reusable CRUD forms and views in `src/components/workspace/`; routes only compose those screens.
+- Load PDF generation dynamically in the browser so document tooling stays outside the server import graph.
